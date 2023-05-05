@@ -1,6 +1,10 @@
 import {
+  // Avatar,
+  // Box,
   Button,
   Card,
+  Dialog,
+  DialogTitle,
   FormControl,
   FormGroup,
   Grid,
@@ -8,7 +12,13 @@ import {
   InputAdornment,
   InputLabel,
   Link,
+  List,
+  ListItem,
+  // ListItemAvatar,
+  ListItemButton,
+  ListItemText,
   OutlinedInput,
+  // Popper,
   Stack,
   TextField,
   Typography,
@@ -18,6 +28,52 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PropTypes from 'prop-types';
+function SimpleDialog(props) {
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value) => {
+    onClose(value);
+  };
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Set backup account</DialogTitle>
+      <List sx={{ pt: 0 }}>
+          <ListItem disableGutters>
+            <ListItemButton
+              
+            
+            >
+           
+              <ListItemText primary="helllo" />
+            </ListItemButton>
+          </ListItem>
+       
+
+        <ListItem disableGutters>
+          <ListItemButton
+            autoFocus
+            onClick={() => handleListItemClick("addAccount")}
+          >
+           
+            <ListItemText primary="Add account" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Dialog>
+  );
+}
+
+SimpleDialog.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  selectedValue: PropTypes.string.isRequired,
+};
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -52,6 +108,19 @@ function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  //popobar
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
   return (
     <>
       <div>
@@ -92,7 +161,7 @@ function Login() {
               </Stack>
             </Card>
           </Grid>
-          <Grid item sm={6} xs={12} lg={6} justifyContent={'space-around'}>
+          <Grid item sm={6} xs={12} lg={6} justifyContent={"space-around"}>
             <Stack
               direction={"column"}
               justifyContent={"flex-start"}
@@ -179,9 +248,18 @@ function Login() {
                     fullWidth
                     color="success"
                     sx={{ mt: 1.5 }}
+                    // aria-describedby={id}
+                    type="button"
+                    // onClick={handleClickOpen}
+                    onClick={handleClickOpen}
                   >
                     Get Started
                   </Button>
+                  <SimpleDialog
+                    selectedValue={selectedValue}
+                    open={open}
+                    onClose={handleClose}
+                  />
                 </FormControl>
               </FormGroup>
             </Stack>
