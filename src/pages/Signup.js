@@ -49,9 +49,7 @@ function Signup({ onClose }) {
   };
   return (
     <>
-   
       <Grid container justifyContent={"space-around"}>
-       
         <Stack
           direction={"column"}
           justifyContent={"flex-start"}
@@ -59,22 +57,18 @@ function Signup({ onClose }) {
           mt={2}
           sx={{ minHeight: 280, minWidth: 295, m: 3 }}
         >
-         
           <Typography variant="h5" fontWeight={600}>
-           Sign in
+            Sign in
           </Typography>
-         
+
           <Typography variant="span" color={"gray"} fontSize={13} marginTop={1}>
             Enter your details below.
           </Typography>
-    
+
           <form //  onSubmit={signUp}
           >
-         
             <FormGroup>
-           
               <FormControl>
-                
                 <TextField
                   color="warning"
                   value={email}
@@ -86,44 +80,38 @@ function Signup({ onClose }) {
                   fullWidth
                   sx={{ mt: 4 }}
                 />
-               <br />
+                <br />
                 <FormControl
                   variant="outlined"
                   color="warning"
                   fullWidth
                   size="small"
                 >
-                  
                   <InputLabel htmlFor="outlined-adornment-password">
-                   Password
+                    Password
                   </InputLabel>
-                
+
                   <OutlinedInput
                     value={password}
                     type={showPassword ? "text" : "password"}
                     size="medium"
                     endAdornment={
                       <InputAdornment position="end">
-                       
                         <IconButton
-                          aria-label="toggle password visibility"
+                        //   aria-label="toggle password visibility"
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                         
-                          {showPassword ? <VisibilityOff /> : <Visibility />}   
-                         
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
-                       
                       </InputAdornment>
                     }
                     label="Password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
-             
                 </FormControl>
-               
+
                 <Button
                   variant="contained"
                   fullWidth
@@ -134,18 +122,12 @@ function Signup({ onClose }) {
                 >
                   Create User
                 </Button>
-              
               </FormControl>
-    
             </FormGroup>
-         
           </form>
-         
         </Stack>
-       
       </Grid>
-     
     </>
   );
 }
-export default Signup
+export default Signup;

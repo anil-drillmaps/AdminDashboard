@@ -10,37 +10,49 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { addDoc, collection } from "@firebase/firestore";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { DB } from "../firebase";
 const schema = yup.object().shape({
-  name: yup.string().min(3).max(10).required(),
+  name: yup.string().min(3).max(20).required(),
   mobile: yup.string().length(10).required(),
   email: yup.string().email().required(),
   address: yup.string().min(3).max(50).required(),
 });
 const defaultValues = {
-  name:'',
-  mobile:'',
-  email:'',
-  address:'',
-}
+  name: "",
+  mobile: "",
+  email: "",
+  address: "",
+};
 
 export default function Adduser() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
   });
-  const submitForm = (data) => {
+
+  const submitForm = async (data) => {
+    //Connect firebase user details
+    await addDoc(collection(DB, "users"), {
+      name: data.name,
+      address: data.address,
+      mobile: data.mobile,
+      email: data.email,
+    });
+    reset(); //Reset form onclick or submit form
     toast.success("Registration success!", {
       position: toast.POSITION.TOP_CENTER,
-    });
+    }); //Successful Message passing.
     console.log(data);
   };
-  console.log(errors)
+  console.log(errors);
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -94,14 +106,14 @@ export default function Adduser() {
                     variant="contained"
                     sx={{
                       border: "2px solid blue",
-                      width: "15%",
+                      width: "25%",
                       height: 50,
                       fontWeight: 700,
                       color: "darkblue",
                       backgroundColor: "#fff",
                       "&:hover": {
                         backgroundColor: "blue", // Background color on hover
-                        color:"white",// Text color on hover
+                        color: "white", // Text color on hover
                       },
                     }}
                   >

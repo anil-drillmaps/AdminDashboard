@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidenav from "../Sidenav";
 import {
   Box,
@@ -11,22 +11,54 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-function createData(sr,uname,mobile,email,address) {
-  return {sr,uname,mobile,email,address};
-}
-const rows=[
-  createData('1','anil',7379075400,'anil@gmail.com','Noida'),
-  createData('2','aman',7379075400,'anil@gmail.com','Noida'),
-  createData('3','ajay',7379075400,'anil@gmail.com','Noida'),
-  createData('4','anish',7379075400,'anil@gmail.com','Noida'),
-  createData('5','arjun',7379075400,'anil@gmail.com','Noida'),
-  createData('6','jhinnu',7379075400,'anil@gmail.com','Noida'),
-  createData('7','santram',7379075400,'anil@gmail.com','Noida'),
-  createData('8','pahadilal',7379075400,'anil@gmail.com','Noida'),
+import { collection, getFirestore } from "@firebase/firestore";
+import { app } from "../firebase";
+import {useCollection} from 'react-firebase-hooks/firestore'
 
-];
+
+
+// function createData(sr,uname,mobile,email,address) {
+//   return {sr,uname,mobile,email,address};
+// }
+// const rows=[
+//   createData('1','anil',7379075400,'anil@gmail.com','Noida'),
+//   createData('2','aman',7379075400,'anil@gmail.com','Noida'),
+//   createData('3','ajay',7379075400,'anil@gmail.com','Noida'),
+//   createData('4','anish',7379075400,'anil@gmail.com','Noida'),
+//   createData('5','arjun',7379075400,'anil@gmail.com','Noida'),
+//   createData('6','jhinnu',7379075400,'anil@gmail.com','Noida'),
+//   createData('7','santram',7379075400,'anil@gmail.com','Noida'),
+//   createData('8','pahadilal',7379075400,'anil@gmail.com','Noida'),
+
+// ];
+
+// const citiesRef = collection(DB, "cities");
+
 
 export default function Showuser() {
+
+
+  const [userList] = useCollection(
+  collection(getFirestore(app), "users",),
+  {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  }
+);
+
+console.log(userList)
+const [userListData, setUserListData] = useState();
+
+  useEffect(() => {
+    let tempData= []
+    if (userList) {
+      let index = 1;
+      userList?.forEach((doc) => {
+        const childData = doc.data();
+        tempData.push({ ...childData, id: index++ });
+      });
+      setUserListData(tempData);
+    }
+  }, [userList]);
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -72,10 +104,10 @@ export default function Showuser() {
                     </TableRow>
                   </TableHead>
                   <TableBody >
-                    {rows.map((row)=>(
-                        <TableRow key={row.sr}>
-                        <TableCell align="center">{row.sr}</TableCell>
-                        <TableCell align="center">{row.uname}</TableCell>
+                    {userListData?.map((row, index)=>(
+                        <TableRow key={index}>
+                        <TableCell align="center">{index+1}</TableCell>
+                        <TableCell align="center">{row.name}</TableCell>
                         <TableCell align="center">{row.mobile}</TableCell>
                         <TableCell align="center">{row.email}</TableCell>
                         <TableCell align="center">{row.address}</TableCell>
