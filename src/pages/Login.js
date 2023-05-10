@@ -64,9 +64,7 @@ function Login() {
 
   return (
     <>
-     
       <div>
-       
         <Grid
           xs={12}
           container
@@ -75,13 +73,10 @@ function Login() {
           justifyContent="space-between"
           alignItems="center"
         >
-         
-          <Grid item sm={6} xs={12} lg={6} justifyContent="space-around">
-        
+          <Grid item sm={6} lg={6} justifyContent="space-around">
             <Card
               sx={{ minHeight: 880, maxWidth: 475, m: 2, borderRadius: "13px" }}
             >
-            
               <Stack
                 elevation={5}
                 direction={"column"}
@@ -89,33 +84,26 @@ function Login() {
                 alignItems={"flex-start"}
                 mt={2}
               >
-               
                 <Link href="#">
-                  
                   <img src="./logo.svg" alt="logo" height={30} width={150} />
-                 
                 </Link>
-            
+
                 <Typography
                   sx={{ fontSize: 29, fontWeight: 600, margin: 3, mt: 0.5 }}
                 >
-                Hi, Welcome to  <br />
-                  Subscription App 
+                  Hi, Welcome to <br />
+                  Subscription App
                 </Typography>
-               
+
                 <img
                   src="./illustration_login.png"
                   alt="illustration_login"
                   width={"100%"}
                 />
-              
               </Stack>
-           
             </Card>
-         
           </Grid>
-          <Grid item sm={6} xs={12} lg={6} justifyContent={"space-around"}>
-           
+          <Grid item sm={6} lg={6} justifyContent={"space-around"}>
             <Stack
               direction={"column"}
               justifyContent={"flex-start"}
@@ -123,26 +111,23 @@ function Login() {
               mt={2}
               sx={{ minHeight: 580, maxWidth: 395, m: 3 }}
             >
-             
               <Typography variant="h5" fontWeight={600}>
-               Sign in 
+                Sign in
               </Typography>
-             
+
               <Typography
                 variant="span"
                 color={"gray"}
                 fontSize={13}
                 marginTop={1}
               >
-              Enter your details below. 
+                Enter your details below.
               </Typography>
-             
+
               <form //  onSubmit={signIn}
               >
                 <FormGroup>
-                 
                   <FormControl>
-                   
                     <TextField
                       color="warning"
                       value={email}
@@ -161,7 +146,10 @@ function Login() {
                       fullWidth
                       size="small"
                     >
-                      <InputLabel htmlFor="outlined-adornment-password">
+                      <InputLabel
+                        htmlFor="outlined-adornment-password"
+                        sx={{ mt: 1 }}
+                      >
                         Password
                       </InputLabel>
                       <OutlinedInput
@@ -188,16 +176,16 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </FormControl>
-                 
+
                     <Link
                       href="#"
                       mt={1}
                       fontSize={13}
                       sx={{ color: "orangered" }}
                     >
-                      Forget Password 
+                      Forget Password
                     </Link>
-                    
+
                     <Button
                       variant="contained"
                       fullWidth
@@ -206,14 +194,13 @@ function Login() {
                       type="submit"
                       onClick={signIn}
                     >
-                      Sign in 
+                      Sign in
                     </Button>
-                  
+
                     <Link mt={1} fontSize={13} sx={{ color: "green" }}>
-                      Don’t have an account? 
-                      
+                      Don’t have an account?
                     </Link>
-                    
+
                     <Button
                       variant="contained"
                       fullWidth
@@ -222,27 +209,19 @@ function Login() {
                       type="button" // onClick={handleClickOpen}
                       onClick={handleClickOpen}
                     >
-                       Get Started 
+                      Get Started
                     </Button>
-                    
                   </FormControl>
-               
                 </FormGroup>
-               
               </form>
-             
             </Stack>
-           
           </Grid>
-          
         </Grid>
-        
+
         <Dialog onClose={handleCloseModel} open={open}>
-         <Signup onClose={setOpen} />
+          <Signup onClose={setOpen} />
         </Dialog>
-        
       </div>
-  
     </>
   );
 }

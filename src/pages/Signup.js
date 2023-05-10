@@ -87,7 +87,7 @@ function Signup({ onClose }) {
                   fullWidth
                   size="small"
                 >
-                  <InputLabel htmlFor="outlined-adornment-password">
+                  <InputLabel htmlFor="outlined-adornment-password" sx={{mt:1}}>
                     Password
                   </InputLabel>
 

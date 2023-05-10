@@ -15,7 +15,7 @@ import { collection, getFirestore } from "@firebase/firestore";
 import { app } from "../firebase";
 import {useCollection} from 'react-firebase-hooks/firestore'
 
-
+// User Details of static Data 
 
 // function createData(sr,uname,mobile,email,address) {
 //   return {sr,uname,mobile,email,address};
